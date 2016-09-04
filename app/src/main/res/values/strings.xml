@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Randomp3</string>
+    <string name="player_stopped">Tap play to reproduce a random mp3</string>
 </resources>

@@ -6,16 +6,19 @@
     <dimen name="min_width_widget">250dp</dimen>
     <dimen name="padding_widget">5dp</dimen>
     <dimen name="margin_widget">5dp</dimen>
+    <dimen name="widget_elevation">4dp</dimen>
 
     <!-- Widget Text Label-->
-    <dimen name="text_size_label_widget">20sp</dimen>
-    <dimen name="text_margin_bottom">5dp</dimen>
+    <dimen name="label_text_size">16.5sp</dimen>
+    <dimen name="label_container_margin_bottom">2dp</dimen>
+    <dimen name="label_container_padding">3dp</dimen>
+    <dimen name="label_container_elevation">4dp</dimen>
 
     <!-- Widget Buttons Dimensions -->
     <dimen name="button_dimensions">40dp</dimen>
     <dimen name="button_margin_right">20dp</dimen>
 
     <!-- Shadow animation for buttons -->
-    <dimen name="button_elevation">2dp</dimen>
-    <dimen name="button_press_elevation">4dp</dimen>
+    <dimen name="button_elevation">4dp</dimen>
+    <dimen name="button_press_elevation">8dp</dimen>
 </resources>
