@@ -1,11 +1,19 @@
 package com.omarmohamed.randomp3.providers;
 
+import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.RemoteViews;
+import android.widget.Toast;
+
+import com.omarmohamed.randomp3.R;
+import com.omarmohamed.randomp3.services.BackgroundSoundService;
+import com.omarmohamed.randomp3.utilities.Constants;
 
 /**
  * Form of BroadcastReceiver which is used to build the user interface of the widget.
@@ -14,6 +22,12 @@ import android.os.Bundle;
  * for every instance of the widget.
  */
 public class Randomp3WidgetProvider extends AppWidgetProvider  {
+
+    /**
+     * Constant for action click on the widget
+     */
+    private static final String ACTION_CLICK = "ACTION_CLICK";
+
     public Randomp3WidgetProvider() {
     }
 
@@ -26,6 +40,22 @@ public class Randomp3WidgetProvider extends AppWidgetProvider  {
     @Override
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
+
+        if(intent.getAction().equalsIgnoreCase(Constants.WidgetActions.ACTION_PLAY)){
+            Toast.makeText(context, "Test for play button", Toast.LENGTH_SHORT).show();
+        }
+        else if(intent.getAction().equalsIgnoreCase(Constants.WidgetActions.ACTION_PAUSE)){
+            Toast.makeText(context, "Test for pause button", Toast.LENGTH_SHORT).show();
+        }
+        else if(intent.getAction().equalsIgnoreCase(Constants.WidgetActions.ACTION_STOP)){
+            Toast.makeText(context, "Test for stop button", Toast.LENGTH_SHORT).show();
+        }
+        else if(intent.getAction().equalsIgnoreCase(Constants.WidgetActions.ACTION_NEXT)){
+            Toast.makeText(context, "Test for next button", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(context, "Test for generic action", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     /**
@@ -49,6 +79,36 @@ public class Randomp3WidgetProvider extends AppWidgetProvider  {
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         super.onUpdate(context, appWidgetManager, appWidgetIds);
+
+
+        Intent playReceiver = new Intent(context, Randomp3WidgetProvider.class);
+        playReceiver.setAction(Constants.WidgetActions.ACTION_PLAY);
+        playReceiver.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds);
+
+        Intent pauseReceiver = new Intent(context, Randomp3WidgetProvider.class);
+        pauseReceiver.setAction(Constants.WidgetActions.ACTION_PAUSE);
+        pauseReceiver.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds);
+
+        Intent stopReceiver = new Intent(context, Randomp3WidgetProvider.class);
+        stopReceiver.setAction(Constants.WidgetActions.ACTION_STOP);
+        stopReceiver.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds);
+
+        Intent nextReceiver = new Intent(context, Randomp3WidgetProvider.class);
+        nextReceiver.setAction(Constants.WidgetActions.ACTION_NEXT);
+        nextReceiver.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds);
+
+        PendingIntent playPendingIntent = PendingIntent.getBroadcast(context, 0, playReceiver, 0);
+        PendingIntent pausePendingIntent = PendingIntent.getBroadcast(context, 0, pauseReceiver, 0);
+        PendingIntent stopPendingIntent = PendingIntent.getBroadcast(context, 0, stopReceiver, 0);
+        PendingIntent nextPendingIntent = PendingIntent.getBroadcast(context, 0, nextReceiver, 0);
+
+        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
+        views.setOnClickPendingIntent(R.id.play_button, playPendingIntent);
+        views.setOnClickPendingIntent(R.id.pause_button, pausePendingIntent);
+        views.setOnClickPendingIntent(R.id.stop_button, stopPendingIntent);
+        views.setOnClickPendingIntent(R.id.next_button, nextPendingIntent);
+
+        appWidgetManager.updateAppWidget(appWidgetIds, views);
     }
 
     /**
