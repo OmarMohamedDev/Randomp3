@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="min_height_widget">72dp</dimen>
-    <dimen name="min_width_widget">146dp</dimen>
+    <!-- Widget Dimensions -->
+    <!-- Rule to determine the dimension of the widget: (cells * 70) - 30 -->
+    <dimen name="min_height_widget">40dp</dimen>
+    <dimen name="min_width_widget">250dp</dimen>
+    <dimen name="padding_widget">5dp</dimen>
+    <dimen name="margin_widget">5dp</dimen>
 
+    <!-- Widget Text Label-->
+    <dimen name="text_size_label_widget">20sp</dimen>
+    <dimen name="text_margin_bottom">5dp</dimen>
+
+    <!-- Widget Buttons Dimensions -->
+    <dimen name="button_dimensions">40dp</dimen>
+    <dimen name="button_margin_right">20dp</dimen>
+
+    <!-- Shadow animation for buttons -->
+    <dimen name="button_elevation">2dp</dimen>
+    <dimen name="button_press_elevation">4dp</dimen>
 </resources>
