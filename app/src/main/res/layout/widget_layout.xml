@@ -14,7 +14,7 @@
         android:orientation="horizontal"
         android:layout_marginBottom="@dimen/label_container_margin_bottom"
         android:padding="@dimen/label_container_padding"
-        android:background="@color/colorPrimaryLight"
+        android:background="@color/colorIcons"
         android:gravity="center"
         android:elevation="@dimen/label_container_elevation"
         android:layout_width="match_parent"
