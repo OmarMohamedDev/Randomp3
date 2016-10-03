@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:padding="@dimen/padding_widget"
+    android:layout_margin="@dimen/margin_widget"
+    android:id="@+id/widget_container"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:elevation="@dimen/widget_elevation"
+    android:background="@color/colorPrimaryDark">
+
+    <LinearLayout
+        android:id="@+id/widget_label_container"
+        android:orientation="horizontal"
+        android:layout_marginBottom="@dimen/label_container_margin_bottom"
+        android:padding="@dimen/label_container_padding"
+        android:background="@color/colorIcons"
+        android:gravity="center"
+        android:elevation="@dimen/label_container_elevation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/widget_label"
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/label_text_size"
+            android:textColor="@color/colorPrimaryText"
+            android:text="@string/player_stopped"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/buttons_container"
+        android:layout_centerHorizontal="true"
+        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/widget_label_container"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/play_stop_container"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/play_button"
+                android:layout_marginEnd="@dimen/button_margin_right"
+                android:layout_width="@dimen/button_dimensions"
+                android:background="@drawable/ripple"
+                android:stateListAnimator="@animator/anim"
+                android:src="@drawable/ic_play"
+                android:layout_height="@dimen/button_dimensions"/>
+
+            <ImageButton
+                android:id="@+id/pause_button"
+                android:background="@drawable/ripple"
+                android:stateListAnimator="@animator/anim"
+                android:src="@drawable/ic_pause"
+                android:layout_marginEnd="@dimen/button_margin_right"
+                android:layout_width="@dimen/button_dimensions"
+                android:layout_height="@dimen/button_dimensions"/>
+
+            <ImageButton
+                android:id="@+id/stop_button"
+                android:background="@drawable/ripple"
+                android:stateListAnimator="@animator/anim"
+                android:src="@drawable/ic_stop"
+                android:layout_marginEnd="@dimen/button_margin_right"
+                android:layout_width="@dimen/button_dimensions"
+                android:layout_height="@dimen/button_dimensions"/>
+
+            <ImageButton
+                android:id="@+id/next_button"
+                android:background="@drawable/ripple"
+                android:stateListAnimator="@animator/anim"
+                android:src="@drawable/ic_next"
+                android:layout_width="@dimen/button_dimensions"
+                android:layout_height="@dimen/button_dimensions"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

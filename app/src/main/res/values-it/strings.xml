@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Randomp3</string>
+    <string name="player_stopped">Tocca play per riprodurre un mp3 casuale</string>
+    <string name="error_no_mp3_available">Non ci sono mp3 che possono essere riprodotti all\'interno del
+        dispositivo oppure non si trovano in una delle cartelle che tipicamente raccoglie questi tipi di file.
+        \nPerfavore, aggiungi dei file mp3 e riprova.</string>
+</resources>
