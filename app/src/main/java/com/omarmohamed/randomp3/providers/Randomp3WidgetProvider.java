@@ -8,12 +8,15 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.widget.RemoteViews;
 import android.widget.Toast;
 
 import com.omarmohamed.randomp3.R;
 import com.omarmohamed.randomp3.services.BackgroundSoundService;
 import com.omarmohamed.randomp3.utilities.Constants;
+
+import static com.omarmohamed.randomp3.utilities.Constants.Mp3Files.REQUEST_EXTERNAL_STORAGE;
 
 /**
  * Form of BroadcastReceiver which is used to build the user interface of the widget.
@@ -43,12 +46,14 @@ public class Randomp3WidgetProvider extends AppWidgetProvider  {
 
         if(intent.getAction().equalsIgnoreCase(Constants.WidgetActions.ACTION_PLAY)){
             Toast.makeText(context, "Test for play button", Toast.LENGTH_SHORT).show();
+            context.startService(new Intent(context, BackgroundSoundService.class));
         }
         else if(intent.getAction().equalsIgnoreCase(Constants.WidgetActions.ACTION_PAUSE)){
             Toast.makeText(context, "Test for pause button", Toast.LENGTH_SHORT).show();
         }
         else if(intent.getAction().equalsIgnoreCase(Constants.WidgetActions.ACTION_STOP)){
             Toast.makeText(context, "Test for stop button", Toast.LENGTH_SHORT).show();
+            context.stopService(new Intent(context, BackgroundSoundService.class));
         }
         else if(intent.getAction().equalsIgnoreCase(Constants.WidgetActions.ACTION_NEXT)){
             Toast.makeText(context, "Test for next button", Toast.LENGTH_SHORT).show();

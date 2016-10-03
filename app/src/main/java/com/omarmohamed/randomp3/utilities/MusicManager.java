@@ -1,6 +1,7 @@
 package com.omarmohamed.randomp3.utilities;
 
 import android.os.Environment;
+import android.util.Log;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -10,12 +11,6 @@ import java.util.HashMap;
  * Class that permit to retrieve data from the device folders
  */
 public class MusicManager {
-
-    /**
-     * Represent the path to the media folder
-     */
-    private final String MEDIA_PATH = Environment.getExternalStorageDirectory()
-            .getPath() + "/";
 
     /**
      * String object that contains the representation of the extension of a mp3 file
@@ -32,8 +27,8 @@ public class MusicManager {
      * Method that read all the mp3 files stored in the device and store the details in an ArrayList
      * */
     public ArrayList<HashMap<String, String>> getPlayList() {
-        if (MEDIA_PATH != null) {
-            File home = new File(MEDIA_PATH);
+        if (Constants.Mp3Files.MEDIA_PATH != null) {
+            File home = new File(Constants.Mp3Files.MEDIA_PATH);
             File[] listFiles = home.listFiles();
 
             if (listFiles != null && listFiles.length > 0) {
@@ -42,7 +37,7 @@ public class MusicManager {
                     if (file.isDirectory()) {
                         scanDirectory(file);
                     } else {
-                        addSongToList(file);
+                    //    addSongToList(file);
                     }
                 }
             }
@@ -50,6 +45,25 @@ public class MusicManager {
 
         // Return the list of songs retrieved
         return songsList;
+    }
+
+    /**
+     * Method that returns the path to the mp3 files
+     * @return the path to the mp3 files
+     * */
+    public String getMp3Path() {
+        File home = new File(Constants.Mp3Files.MEDIA_PATH);
+        File[] listFiles = home.listFiles();
+
+//        Log.e("ERRORE_PLAY",Constants.Mp3Files.MEDIA_PATH);
+//        if (listFiles != null && listFiles.length > 0) {
+//            Log.e("ERRORE_PLAY","Dentro il secondo if");
+            return Constants.Mp3Files.MEDIA_PATH;
+//        } else {
+//            Log.e("ERRORE_PLAY","Dentro il primo else");
+//            return Constants.Mp3Files.NO_MP3_FILES_AVAILABLE;
+//        }
+
     }
 
     /**

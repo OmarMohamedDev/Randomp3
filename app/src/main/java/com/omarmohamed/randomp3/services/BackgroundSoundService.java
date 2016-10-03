@@ -3,14 +3,20 @@ package com.omarmohamed.randomp3.services;
 import android.app.Service;
 import android.content.Intent;
 import android.media.MediaPlayer;
-import android.os.Environment;
 import android.os.IBinder;
+import android.widget.Toast;
+
+import com.omarmohamed.randomp3.R;
+import com.omarmohamed.randomp3.utilities.Constants;
+import com.omarmohamed.randomp3.utilities.MusicManager;
+import com.omarmohamed.randomp3.utilities.Utils;
 
 import java.io.IOException;
 
 public class BackgroundSoundService extends Service {
     private static final String TAG = null;
-    MediaPlayer player;
+    MediaPlayer mPlayer;
+    String mDataSource;
 
     public IBinder onBind(Intent arg0) {
 
@@ -20,26 +26,33 @@ public class BackgroundSoundService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        player = new MediaPlayer();
-        try {
-            //Getting mp3 from the device //TODO: Create utility method that retrieve all the mp3 files and set here a list of them
-            player.setDataSource(Environment.getExternalStorageDirectory().getAbsolutePath() + "/your file.mp3");
-        } catch (IOException e) {
-            e.printStackTrace();
+        mPlayer = new MediaPlayer();
+        mDataSource = new MusicManager().getMp3Path();
+
+        if(!mDataSource.equals(Constants.Mp3Files.NO_MP3_FILES_AVAILABLE)) {
+
+            try {
+                //Getting mp3 from the device
+                mPlayer.setDataSource(new MusicManager().getMp3Path());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            mPlayer.setLooping(true); // Set looping
+            mPlayer.setVolume(100, 100);
+        } else {
+            Toast.makeText(this, getString(R.string.error_no_mp3_available), Toast.LENGTH_LONG).show();
         }
-        player.setLooping(true); // Set looping
-        player.setVolume(100, 100);
 
     }
 
     public int onStartCommand(Intent intent, int flags, int startId) {
 
-        try {
-            player.prepare();
-            player.start();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            mPlayer.prepare();
+            mPlayer.start();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
         //We should continue to play music if the service crash because the system needed memory to be freed
         return START_STICKY;
     }
@@ -50,7 +63,8 @@ public class BackgroundSoundService extends Service {
     }
 
     public void onStop() {
-
+        mPlayer.stop();
+        mPlayer.release();
     }
 
     public void onPause() {
@@ -59,8 +73,8 @@ public class BackgroundSoundService extends Service {
 
     @Override
     public void onDestroy() {
-        player.stop();
-        player.release();
+        mPlayer.stop();
+        mPlayer.release();
     }
 
     @Override
